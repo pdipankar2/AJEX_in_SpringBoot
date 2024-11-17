@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/webjars/jquery/3.7.0/jquery.min.js"></script>
+
+
+<script>
+	$(document).ready(function() {
+		
+		$("#cname").on("change",function(e) {
+			//alert("dropdown change");
+			$.ajax({
+
+				url : "cmsg",
+				type : "GET",
+				data : {
+					cname : $("#cname").val()
+				},
+				success : function(data) {
+
+					$("#dropdownDiv").html(data);
+				},
+				error : function(data) {
+					alert('error');
+				}
+
+			});
+
+		});
+		
+		
+		
+		
+		
+		
+		
+
+		$("#SubmitButton").click(function(e) {
+			var name = $("#name").val();
+
+			$.ajax({
+
+				url : "msg",
+				type : "GET",
+				data : {
+					name : $("#username").val()
+				},
+				success : function(result) {
+
+					$("#msgDiv").html(result);
+				},
+				error : function(result) {
+					alert('error');
+				}
+
+			});
+
+		});
+
+	});
+</script>
+
+</head>
+<body>
+
+
+
+	Enter Name:
+	<input type="text" name="name" id="username" />
+	<input type="button" value="submit" id="SubmitButton">
+
+
+	<hr>
+
+	<p th:text="${msg}"></p>
+
+
+	<div id="msgDiv"></div>
+	<hr />
+
+
+	<select id="cname">
+
+		<option>-select--</option>
+		<option>-India--</option>
+		<option>-USA--</option>
+		<option>-Canada--</option>
+		<option>-China--</option>
+
+
+	</select>
+
+
+	<hr>
+
+	<div id="dropdownDiv"></div>
+
+
+
+</body>
+</html>
